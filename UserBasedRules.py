@@ -19,11 +19,11 @@ class RuleEngine:
 
     def multiple_actions(self):
         multiple_action = input(
-            "If you have actions per condition enter `Y` else enter `N`\n")
+            "If you have actions per condition enter `Y` else enter anything\n")
         if (multiple_action.upper() == 'Y'):
             self.is_multiple_action = True
         operator = input(
-            "Do you want action to take place only if all condtion satisfy enter `Y` else enter `N`\n")
+            "Do you want action to take place only if all condtion satisfy enter `Y` else enter anything\n")
         if (operator.upper() == 'Y'):
             self.operator = "and"
 
@@ -68,7 +68,9 @@ if not rule_engine.is_multiple_action:
   rule_engine.get_action()
 
 while True:
-  input_value = input("Enter the Value to test")
+  input_value = input("Enter the Value to test\n")
+  if(input_value.isnumeric()):
+      input_value = int(input_value)
   result = rule_engine.apply_rule(input_value)
   print(result)
   break
