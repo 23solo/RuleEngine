@@ -22,10 +22,11 @@ class RuleEngine:
             "If you have actions per condition enter `Y` else enter anything\n")
         if (multiple_action.upper() == 'Y'):
             self.is_multiple_action = True
-        operator = input(
-            "Do you want action to take place only if all condtion satisfy enter `Y` else enter anything\n")
-        if (operator.upper() == 'Y'):
-            self.operator = "and"
+        else:
+          operator = input(
+              "if you want action to take place only if all condtion satisfy enter `Y` else \nit will take action if any condition gets satisfied\n")
+          if (operator.upper() == 'Y'):
+              self.operator = "and"
 
     def generate_conditions(self):
         self.num_conditions = int(input("Enter the number of conditions: "))
@@ -69,8 +70,12 @@ if not rule_engine.is_multiple_action:
 
 while True:
   input_value = input("Enter the Value to test\n")
-  if(input_value.isnumeric()):
+  try:
       input_value = int(input_value)
+  except ValueError:
+      pass  # not an integer
   result = rule_engine.apply_rule(input_value)
   print(result)
-  break
+  to_continue = input("Press Y if you want to check other user... ")
+  if(to_continue.upper() != 'Y'):
+      break
